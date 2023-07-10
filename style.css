@@ -1,0 +1,18 @@
+.masonry {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .masonry__item {
+    width: 100%;
+    margin-bottom: 10px; /* Adjust spacing between items */
+  }
+  
+  .masonry__image {
+    display: block;
+    width: 200px;
+
+  }
+  
