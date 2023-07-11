@@ -1,3 +1,4 @@
+
 .masonry {
     position: relative;
     list-style: none;
@@ -14,7 +15,7 @@
   .masonry__image {
     display: block;
     height: auto;
-    width: 95%;
+    width: 90%;
     
   }
   

@@ -3,13 +3,14 @@ function Masonry() {
 }
 
 Masonry.prototype.render = function(className, objectSettings) {
+
   const container = document.querySelector(className)
   const items = document.querySelectorAll('.masonry__item')
   const columnWidth = objectSettings.columnWidth || 200
   const autoResize = objectSettings.autoResize || false
   const numberColumns = Math.round(container.offsetWidth / columnWidth)
   const columns = []
-  console.log(columnWidth);
+
   for (let i = 0; i < numberColumns; i++) {
     columns.push(0)
   }
@@ -21,12 +22,14 @@ Masonry.prototype.render = function(className, objectSettings) {
     item.style.left = `${(columnIndex * columnWidth)}px`
     item.style.top = `${columns[columnIndex]}px`
     item.style.width = columnWidth + 'px'
-    columns[columnIndex] += item.offsetHeight
+    columns[columnIndex] += item.offsetHeight +10
   }
+
   container.style.height = Math.max(...columns) + 'px'
   
   if (autoResize) {
     window.addEventListener('resize', () => {
+
       if (this.resizeRequestId) {
         return; 
       }
@@ -50,10 +53,12 @@ function getColumnIndex(columns) {
   let indexHeight = columns[0]
 
   for (let i = 0; i < columns.length; i++) {
-    if (columns[i] < indexHeight) {
+
+    if (columns[i] <= indexHeight) {
       index = i
       indexHeight = columns[i]
     }
+
   }
 
   return index
@@ -67,8 +72,10 @@ Masonry.prototype.handleResize = function(className, objectSettings) {
 const MasonryLayout = new Masonry();
 
 window.addEventListener('DOMContentLoaded', () => {
+
   MasonryLayout.render('.masonry', {
     columnWidth: 200,
     autoResize: true
   });
+
 });
