@@ -6,13 +6,15 @@
   }
   
   .masonry__item {
-    width: 100%;
-    margin-bottom: 10px; /* Adjust spacing between items */
+    position: absolute;
+    margin-bottom: 10px;
+    width: 100% ;
   }
   
   .masonry__image {
     display: block;
-    width: 200px;
-
+    height: auto;
+    width: 95%;
+    
   }
   
