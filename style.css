@@ -8,14 +8,13 @@
   
   .masonry__item {
     position: absolute;
-    margin-bottom: 10px;
     width: 100% ;
   }
   
   .masonry__image {
     display: block;
     height: auto;
-    width: 90%;
+    width: 95%;
     
   }
   

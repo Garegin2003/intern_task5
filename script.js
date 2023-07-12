@@ -8,7 +8,7 @@ Masonry.prototype.render = function(className, objectSettings) {
   const items = document.querySelectorAll('.masonry__item')
   const columnWidth = objectSettings.columnWidth || 200
   const autoResize = objectSettings.autoResize || false
-  const numberColumns = Math.round(container.offsetWidth / columnWidth)
+  const numberColumns = Math.trunc(container.offsetWidth / columnWidth)
   const columns = []
 
   for (let i = 0; i < numberColumns; i++) {
@@ -22,7 +22,7 @@ Masonry.prototype.render = function(className, objectSettings) {
     item.style.left = `${(columnIndex * columnWidth)}px`
     item.style.top = `${columns[columnIndex]}px`
     item.style.width = columnWidth + 'px'
-    columns[columnIndex] += item.offsetHeight +10
+    columns[columnIndex] += item.offsetHeight+10
   }
 
   container.style.height = Math.max(...columns) + 'px'
@@ -58,7 +58,6 @@ function getColumnIndex(columns) {
       index = i
       indexHeight = columns[i]
     }
-
   }
 
   return index
@@ -74,8 +73,7 @@ const MasonryLayout = new Masonry();
 window.addEventListener('DOMContentLoaded', () => {
 
   MasonryLayout.render('.masonry', {
-    columnWidth: 200,
+    columnWidth: 300,
     autoResize: true
   });
-
 });
