@@ -1,0 +1,13 @@
+.masonry {
+  position: relative;
+  list-style: none;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0; }
+  .masonry__item {
+    position: absolute;
+    width: 100%; }
+  .masonry__image {
+    display: block;
+    height: auto;
+    width: 100%; }

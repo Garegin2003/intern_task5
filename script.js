@@ -8,6 +8,7 @@ Masonry.prototype.render = function(className, objectSettings) {
   const items = document.querySelectorAll('.masonry__item')
   const columnWidth = objectSettings.columnWidth || 200
   const autoResize = objectSettings.autoResize || false
+  const gap = objectSettings.gap || 0
   const numberColumns = Math.trunc(container.offsetWidth / columnWidth)
   const columns = []
 
@@ -18,14 +19,16 @@ Masonry.prototype.render = function(className, objectSettings) {
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const columnIndex = getColumnIndex(columns)
-
-    item.style.left = `${(columnIndex * columnWidth)}px`
+    
+    item.style.left = `${(columnIndex * columnWidth) + (columnIndex * gap)}px`
     item.style.top = `${columns[columnIndex]}px`
     item.style.width = columnWidth + 'px'
-    columns[columnIndex] += item.offsetHeight+10
+    columns[columnIndex] += item.offsetHeight + gap
   }
 
-  container.style.height = Math.max(...columns) + 'px'
+
+
+  container.style.height = Math.max(...columns) +  'px'
   
   if (autoResize) {
     window.addEventListener('resize', () => {
@@ -35,11 +38,13 @@ Masonry.prototype.render = function(className, objectSettings) {
       }
 
       this.resizeRequestId = window.requestAnimationFrame(() => {
+        console.log(565);
         this.resizeRequestId = null;
 
         this.handleResize(className, {
           columnWidth: columnWidth,
-          autoResize: autoResize
+          autoResize: autoResize,
+          gap: gap
         });
       });
     });
@@ -74,6 +79,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   MasonryLayout.render('.masonry', {
     columnWidth: 300,
-    autoResize: true
+    autoResize: true,
+    gap: 10
   });
+
 });
