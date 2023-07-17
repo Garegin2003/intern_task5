@@ -1,8 +1,12 @@
-function Masonry() {
+function Masonry(className,objectSettings) {
   this.resizeRequestId = null;
+  this.objectSettings = objectSettings
+  this.className = className
 }
 
 Masonry.prototype.render = function (className, objectSettings) {
+  objectSettings = this.objectSettings
+  className = this.className
   const container = document.querySelector(className);
   const items = document.querySelectorAll('.masonry__item');
   const columnWidth = objectSettings.columnWidth || 200;
@@ -17,7 +21,7 @@ Masonry.prototype.render = function (className, objectSettings) {
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const columnIndex = getColumnIndex(columns);
+    const columnIndex = this.getColumnIndex(columns);
 
     item.style.left = `${columnIndex * columnWidth + columnIndex * gap}px`;
     item.style.top = `${columns[columnIndex]}px`;
@@ -36,11 +40,7 @@ Masonry.prototype.render = function (className, objectSettings) {
       this.resizeRequestId = window.requestAnimationFrame(() => {
         this.resizeRequestId = null;
 
-        this.handleResize(className, {
-          columnWidth: columnWidth,
-          autoResize: autoResize,
-          gap: gap,
-        });
+        this.handleResize();
       });
     });
   } else {
@@ -48,7 +48,7 @@ Masonry.prototype.render = function (className, objectSettings) {
   }
 };
 
-function getColumnIndex(columns) {
+Masonry.prototype.getColumnIndex = function (columns) {
   let index = 0;
   let indexHeight = columns[0];
 
@@ -62,16 +62,16 @@ function getColumnIndex(columns) {
   return index;
 }
 
-Masonry.prototype.handleResize = function (className, objectSettings) {
-  this.render(className, objectSettings);
+Masonry.prototype.handleResize = function () {
+  this.render(this.className, this.objectSettings);
 };
 
-const MasonryLayout = new Masonry();
+const MasonryLayout = new Masonry('.masonry', {
+  columnWidth: 300,
+  autoResize: true,
+  gap: 10,
+});
 
 window.addEventListener('DOMContentLoaded', () => {
-  MasonryLayout.render('.masonry', {
-    columnWidth: 300,
-    autoResize: true,
-    gap: 10,
-  });
+  MasonryLayout.render();
 });
